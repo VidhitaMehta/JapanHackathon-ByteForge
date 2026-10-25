@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shinzoku Setu tests</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 820px; margin: 32px auto; padding: 0 16px; background: #f6f4ef; color: #1d1b19; }
+    li { padding: 4px 0; } .ok { color: #1e7b3c; } .bad { color: #b3261e; } small { color: #6b665f; }
+    h1 { font-size: 1.4rem; }
+  </style>
+</head>
+<body>
+  <h1>Shinzoku Setu — engine tests</h1>
+  <p id="summary"></p>
+  <ul id="list"></ul>
+  <script src="../js/data/rules.js"></script>
+  <script src="../js/data/dictionary.js"></script>
+  <script src="../js/data/states.js"></script>
+  <script src="../js/data/leads.js"></script>
+  <script src="../js/core/engine.js"></script>
+  <script src="engine.test.js"></script>
+  <script>
+    const r = window.ID_TEST_RESULTS, failed = r.filter((x) => !x.ok).length;
+    document.getElementById("summary").innerHTML = `<b class="${failed ? "bad" : "ok"}">${r.length - failed} of ${r.length} tests passed</b>`;
+    document.getElementById("list").innerHTML = r.map((x) => `<li class="${x.ok ? "ok" : "bad"}">${x.ok ? "✓" : "✕"} ${x.name}${x.ok ? "" : `<br><small>${x.msg}</small>`}</li>`).join("");
+  </script>
+</body>
+</html>
